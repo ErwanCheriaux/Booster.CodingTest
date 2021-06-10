@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Booster.CodingTest
 {
@@ -10,10 +11,32 @@ namespace Booster.CodingTest
 
             var stream = new Library.WordStream();
 
-            while(stream.CanRead)
+            string word = "";
+            var dico = new Dictionary<string, int>();
+
+            while (stream.CanRead)
             {
                 int b = stream.ReadByte();
-                Console.WriteLine(Convert.ToChar(b));
+                char c = Convert.ToChar(b);
+
+                if (Char.IsLetter(c))
+                {
+                    word += c;
+                }
+                else if (word != "")
+                {
+                    if (dico.ContainsKey(word))
+                    {
+                        dico[word]++;
+                    }
+                    else
+                    {
+                        dico.Add(word, 1);
+                    }
+
+                    Console.WriteLine(word);
+                    word = "";
+                }
             }
         }
     }
