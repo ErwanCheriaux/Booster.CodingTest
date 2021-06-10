@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Booster.CodingTest
 {
@@ -34,8 +35,9 @@ namespace Booster.CodingTest
                         dico.Add(word, 1);
                     }
 
-                    Console.WriteLine(word);
+                    Console.WriteLine($"{word}\t{dico[word]}");
                     word = "";
+                    Thread.Sleep(500);
                 }
             }
         }
