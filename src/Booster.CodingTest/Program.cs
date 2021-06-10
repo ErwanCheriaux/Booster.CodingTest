@@ -13,7 +13,13 @@ namespace Booster.CodingTest
             var stream = new Library.WordStream();
 
             string word = "";
+
+            // The 10 most frequently appearing words.
             var dico = new Dictionary<string, int>();
+
+            // Total number of characters and words.
+            int countWord = 0;
+            int countChar = 0;
 
             while (stream.CanRead)
             {
@@ -36,9 +42,13 @@ namespace Booster.CodingTest
                     }
 
                     Console.WriteLine($"{word}\t{dico[word]}");
-                    word = "";
                     Thread.Sleep(500);
+
+                    word = "";
+                    countWord++;
                 }
+
+                countChar++;
             }
         }
     }
