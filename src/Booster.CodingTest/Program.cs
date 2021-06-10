@@ -7,6 +7,9 @@ namespace Booster.CodingTest
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+            var stream = new Library.WordStream();
+            Console.WriteLine(stream);
         }
     }
 }
