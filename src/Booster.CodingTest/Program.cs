@@ -9,7 +9,12 @@ namespace Booster.CodingTest
             Console.WriteLine("Hello World!");
 
             var stream = new Library.WordStream();
-            Console.WriteLine(stream);
+
+            while(stream.CanRead)
+            {
+                int b = stream.ReadByte();
+                Console.WriteLine(Convert.ToChar(b));
+            }
         }
     }
 }
