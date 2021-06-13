@@ -1,18 +1,33 @@
 using NUnit.Framework;
+using System.IO;
+using System.Text;
 
 namespace Booster.CodingTest.Tests
 {
-    public class Tests
+    [TestFixture]
+    public class ProgramTests
     {
+        /// <summary>
+        /// Tests for <see cref="Program" />.
+        /// </summary>
         [SetUp]
         public void Setup()
         {
         }
 
         [Test]
-        public void Test1()
+        public void ProcessText_13CharactersText_13CharactersDetected()
         {
-            Assert.Pass();
+            //Arrange
+            string text = "Testing 1-2-3";
+            byte[] byteArray = Encoding.ASCII.GetBytes(text);
+            MemoryStream stream = new(byteArray);
+
+            //Act
+            Program.ProcessText(stream);
+
+            //Assert
+            Assert.AreEqual(stream.Length, Program.countChar);
         }
     }
 }
