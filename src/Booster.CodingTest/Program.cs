@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 
 namespace Booster.CodingTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
 
             var stream = new Library.WordStream();
 
+            processText(stream);
+
+            Console.WriteLine("End of the program");
+        }
+
+        static public void processText(Stream text)
+        {
             string word = "";
 
             // The 10 most frequently appearing words.
@@ -21,9 +29,9 @@ namespace Booster.CodingTest
             int countWord = 0;
             int countChar = 0;
 
-            while (stream.CanRead)
+            while (text.CanRead)
             {
-                int b = stream.ReadByte();
+                int b = text.ReadByte();
                 char c = Convert.ToChar(b);
 
                 if (Char.IsLetter(c))
