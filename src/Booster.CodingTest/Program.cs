@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace Booster.CodingTest
 {
@@ -34,12 +35,12 @@ namespace Booster.CodingTest
 
             var stream = new Library.WordStream();
 
-            ProcessText(stream);
+            ProcessText(stream, true);
 
             Console.WriteLine("End of the program");
         }
 
-        public static void ProcessText(Stream text)
+        public static void ProcessText(Stream text, bool output = false)
         {
             string word = "";
 
@@ -72,17 +73,19 @@ namespace Booster.CodingTest
                         dico.Add(word, 1);
                     }
 
-                    Console.WriteLine($"{word}\t{dico[word]}");
-                    //Thread.Sleep(500);
+                    if (output)
+                    {
+                        Console.WriteLine($"{word}\t{dico[word]}");
+                        Thread.Sleep(500);
+                    }
 
                     word = "";
                     _countWord++;
-                    //_frequentWords = GetMostFrequencyWord(dico, 10);
+                    _frequentWords = GetMostFrequencyWord(dico, 10);
                 }
 
                 _countChar++;
             }
-            _frequentWords = GetMostFrequencyWord(dico, 10);
         }
 
         private static List<string> GetMostFrequencyWord(Dictionary<string, int> dico, int countMostFrequencyWords)
