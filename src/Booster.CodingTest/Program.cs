@@ -7,8 +7,19 @@ namespace Booster.CodingTest
 {
     public class Program
     {
-        static public int countWord;
-        static public int countChar;
+        static private int _countWord;
+
+        static public int countWord
+        {
+            get { return _countWord; }
+        }
+
+        static private int _countChar;
+
+        static public int countChar
+        {
+            get { return _countChar; }
+        }
 
         private static void Main(string[] args)
         {
@@ -29,8 +40,8 @@ namespace Booster.CodingTest
             var frequencyWord = new Dictionary<string, int>();
 
             // Total number of characters and words.
-            countWord = 0;
-            countChar = 0;
+            _countWord = 0;
+            _countChar = 0;
 
             while (true)
             {
@@ -58,10 +69,10 @@ namespace Booster.CodingTest
                     Thread.Sleep(500);
 
                     word = "";
-                    countWord++;
+                    _countWord++;
                 }
 
-                countChar++;
+                _countChar++;
             }
         }
     }
