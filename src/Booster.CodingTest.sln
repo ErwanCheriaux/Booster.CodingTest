@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booster.CodingTest", "Booster.CodingTest\Booster.CodingTest.csproj", "{ED3CEB18-81EC-4EDE-A8B8-D173A7B3992D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booster.CodingTest", "Booster.CodingTest\Booster.CodingTest.csproj", "{ED3CEB18-81EC-4EDE-A8B8-D173A7B3992D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booster.CodingTest.Tests", "Booster.CodingTest.Tests\Booster.CodingTest.Tests.csproj", "{6EF14A2C-0770-4561-925E-7A07F1ADCF23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{ED3CEB18-81EC-4EDE-A8B8-D173A7B3992D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED3CEB18-81EC-4EDE-A8B8-D173A7B3992D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED3CEB18-81EC-4EDE-A8B8-D173A7B3992D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EF14A2C-0770-4561-925E-7A07F1ADCF23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF14A2C-0770-4561-925E-7A07F1ADCF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF14A2C-0770-4561-925E-7A07F1ADCF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF14A2C-0770-4561-925E-7A07F1ADCF23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
