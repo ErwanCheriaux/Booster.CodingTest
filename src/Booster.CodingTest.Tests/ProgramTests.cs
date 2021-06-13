@@ -29,5 +29,20 @@ namespace Booster.CodingTest.Tests
             //Assert
             Assert.AreEqual(stream.Length, Program.countChar);
         }
+
+        [Test]
+        public void ProcessText_4WordsText_4WordsDetected()
+        {
+            //Arrange
+            string text = "This is a test!";
+            byte[] byteArray = Encoding.ASCII.GetBytes(text);
+            MemoryStream stream = new(byteArray);
+
+            //Act
+            Program.ProcessText(stream);
+
+            //Assert
+            Assert.AreEqual(text.Split().Length, Program.countWord);
+        }
     }
 }
