@@ -1,28 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading;
 
 namespace Booster.CodingTest
 {
     public class Program
     {
-        static private int _countWord;
+        static private int _countWord = 0;
 
         static public int CountWord
         {
             get { return _countWord; }
         }
 
-        static private int _countChar;
+        static private int _countChar = 0;
 
         static public int CountChar
         {
             get { return _countChar; }
         }
 
-        static private List<string> _frequentWords;
+        static private List<string> _frequentWords = new();
 
         static public List<string> FrequentWords
         {
@@ -46,6 +45,7 @@ namespace Booster.CodingTest
 
             // The 10 most frequently appearing words.
             var dico = new Dictionary<string, int>();
+            _frequentWords = new();
 
             // Total number of characters and words.
             _countWord = 0;
@@ -79,28 +79,40 @@ namespace Booster.CodingTest
                         Thread.Sleep(500);
                     }
 
-                    word = "";
                     _countWord++;
-                    _frequentWords = GetMostFrequencyWord(dico, 10);
+                    _frequentWords = GetMostFrequencyWord(dico, _frequentWords, word, 10);
+
+                    word = "";
                 }
 
                 _countChar++;
             }
         }
 
-        private static List<string> GetMostFrequencyWord(Dictionary<string, int> dico, int countMostFrequencyWords)
+        /// <summary>
+        /// Gets the most frequency word.
+        /// </summary>
+        /// <param name="dico">Dictionary of every words and frequency.</param>
+        /// <param name="frequentWordsList">The frequent words list.</param>
+        /// <param name="newWord">The new word to compare withe the frequent words list.</param>
+        /// <param name="count">The number of word in the frequent words list.</param>
+        /// <returns>List of the most frequency word.</returns>
+        private static List<string> GetMostFrequencyWord(Dictionary<string, int> dico, List<string> frequentWordsList, string newWord, int count)
         {
-            var dicoToList = dico.ToList();
-            dicoToList.Sort((x, y) => y.Value.CompareTo(x.Value));
-            List<string> wordList = new();
-
-            foreach (var item in dicoToList)
+            if (frequentWordsList.Contains(newWord))
             {
-                wordList.Add(item.Key);
-                if (--countMostFrequencyWords == 0) break;
+                return frequentWordsList;
             }
 
-            return wordList;
+            frequentWordsList.Add(newWord);
+
+            if (frequentWordsList.Count > count)
+            {
+                frequentWordsList.Sort((x, y) => dico[y].CompareTo(dico[x]));
+                frequentWordsList.RemoveAt(count);
+            }
+
+            return frequentWordsList;
         }
     }
 }
