@@ -46,6 +46,48 @@ namespace Booster.CodingTest.Tests
         }
 
         [Test]
+        public void ProcessText_WordsText_5SmallestWords()
+        {
+            //Arrange
+            string[] smallestWords = { "a", "i", "e", "is", "to" };
+            string text = "This test is intended to allow a potential candidate to demonstrate their technical " +
+                "proficiency and approach to software development, while solving a relatively trival problem.# " +
+                "The challenge:Write an application(console, web, forms or other.NET application type of your " +
+                "choosing) which will continually read and process text from a provided stream.Your application" +
+                " should process and output in real time(i.e. as you read it from the stream) the following " +
+                "information about the stream:";
+            byte[] byteArray = Encoding.ASCII.GetBytes(text);
+            MemoryStream stream = new(byteArray);
+
+            //Act
+            Program.ProcessText(stream);
+
+            //Assert
+            CollectionAssert.AreEquivalent(smallestWords, Program.SmallestWords);
+        }
+
+        [Test]
+        public void ProcessText_WordsText_5LargestWords()
+        {
+            //Arrange
+            string[] largestWords = { "demonstrate", "proficiency", "development", "application", "continually" };
+            string text = "This test is intended to allow a potential candidate to demonstrate their technical " +
+                "proficiency and approach to software development, while solving a relatively trival problem.# " +
+                "The challenge:Write an application(console, web, forms or other.NET application type of your " +
+                "choosing) which will continually read and process text from a provided stream.Your application" +
+                " should process and output in real time(i.e. as you read it from the stream) the following " +
+                "information about the stream:";
+            byte[] byteArray = Encoding.ASCII.GetBytes(text);
+            MemoryStream stream = new(byteArray);
+
+            //Act
+            Program.ProcessText(stream);
+
+            //Assert
+            CollectionAssert.AreEquivalent(largestWords, Program.LargestWords);
+        }
+
+        [Test]
         public void ProcessText_WordsText_10MostFrequentlyAppearingWords()
         {
             //Arrange
