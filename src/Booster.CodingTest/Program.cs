@@ -99,8 +99,8 @@ namespace Booster.CodingTest
 
                     _countWord++;
                     _frequentWords = GetMostFrequencyWord(dico, _frequentWords, word, 10);
-                    _smallestWords = GetSmallestWord(_smallestWords, word, 5);
-                    _largestWords = GetLargestWord(_largestWords, word, 5);
+                    UpdateWordsList(ref _smallestWords, word, 5, SmallestWord);
+                    UpdateWordsList(ref _largestWords, word, 5, LargestWord);
 
                     word = "";
                 }
@@ -109,40 +109,21 @@ namespace Booster.CodingTest
             }
         }
 
-        private static List<string> GetSmallestWord(List<string> smallestWordsList, string newWord, int count)
+        private static int SmallestWord(string x, string y) => x.Length.CompareTo(y.Length);
+        private static int LargestWord(string x, string y) => y.Length.CompareTo(x.Length);
+
+        private static void UpdateWordsList(ref List<string> wordsList, string newWord, int sizeList, Comparison<string> compareRule)
         {
-            if (smallestWordsList.Contains(newWord))
+            if (!wordsList.Contains(newWord))
             {
-                return smallestWordsList;
+                wordsList.Add(newWord);
+
+                if (wordsList.Count > sizeList)
+                {
+                    wordsList.Sort(compareRule);
+                    wordsList.RemoveAt(sizeList);
+                }
             }
-
-            smallestWordsList.Add(newWord);
-
-            if (smallestWordsList.Count > count)
-            {
-                smallestWordsList.Sort((x, y) => x.Length.CompareTo(y.Length));
-                smallestWordsList.RemoveAt(count);
-            }
-
-            return smallestWordsList;
-        }
-
-        private static List<string> GetLargestWord(List<string> largestWordsList, string newWord, int count)
-        {
-            if (largestWordsList.Contains(newWord))
-            {
-                return largestWordsList;
-            }
-
-            largestWordsList.Add(newWord);
-
-            if (largestWordsList.Count > count)
-            {
-                largestWordsList.Sort((x, y) => y.Length.CompareTo(x.Length));
-                largestWordsList.RemoveAt(count);
-            }
-
-            return largestWordsList;
         }
 
         /// <summary>
