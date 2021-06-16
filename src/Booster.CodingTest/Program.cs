@@ -44,6 +44,8 @@ namespace Booster.CodingTest
             get { return _frequentWords; }
         }
 
+        private static readonly Dictionary<string, int> Dico = new();
+
         #endregion "properties"
 
         private static void Main(string[] args)
@@ -62,8 +64,8 @@ namespace Booster.CodingTest
             string word = "";
 
             // The 10 most frequently appearing words.
-            var dico = new Dictionary<string, int>();
             _frequentWords = new();
+            Dico.Clear();
 
             // Total number of characters and words.
             _countWord = 0;
@@ -82,26 +84,26 @@ namespace Booster.CodingTest
                 }
                 else if (word != "")
                 {
-                    if (dico.ContainsKey(word))
+                    if (Dico.ContainsKey(word))
                     {
-                        dico[word]++;
+                        Dico[word]++;
                     }
                     else
                     {
-                        dico.Add(word, 1);
+                        Dico.Add(word, 1);
                     }
 
                     if (output)
                     {
-                        Console.WriteLine($"{word}\t{dico[word]}");
+                        Console.WriteLine($"{word}\t{Dico[word]}");
                         Thread.Sleep(500);
                     }
 
-                    _countWord++;
-                    _frequentWords = GetMostFrequencyWord(dico, _frequentWords, word, 10);
                     UpdateWordsList(ref _smallestWords, word, 5, SmallestWord);
                     UpdateWordsList(ref _largestWords, word, 5, LargestWord);
+                    UpdateWordsList(ref _frequentWords, word, 10, FrequentWord);
 
+                    _countWord++;
                     word = "";
                 }
 
@@ -111,7 +113,15 @@ namespace Booster.CodingTest
 
         private static int SmallestWord(string x, string y) => x.Length.CompareTo(y.Length);
         private static int LargestWord(string x, string y) => y.Length.CompareTo(x.Length);
+        private static int FrequentWord(string x, string y) => Dico[y].CompareTo(Dico[x]);
 
+        /// <summary>
+        /// Updates the words list.
+        /// </summary>
+        /// <param name="wordsList">The words list to update.</param>
+        /// <param name="newWord">The new word to compare with the words list.</param>
+        /// <param name="sizeList">The max size of the word list.</param>
+        /// <param name="compareRule">The comparing rule: smallestWord, largestWord or FrequentWord</param>
         private static void UpdateWordsList(ref List<string> wordsList, string newWord, int sizeList, Comparison<string> compareRule)
         {
             if (!wordsList.Contains(newWord))
@@ -124,32 +134,6 @@ namespace Booster.CodingTest
                     wordsList.RemoveAt(sizeList);
                 }
             }
-        }
-
-        /// <summary>
-        /// Gets the most frequency word.
-        /// </summary>
-        /// <param name="dico">Dictionary of every words and frequency.</param>
-        /// <param name="frequentWordsList">The frequent words list.</param>
-        /// <param name="newWord">The new word to compare withe the frequent words list.</param>
-        /// <param name="count">The number of word in the frequent words list.</param>
-        /// <returns>List of the most frequency word.</returns>
-        private static List<string> GetMostFrequencyWord(Dictionary<string, int> dico, List<string> frequentWordsList, string newWord, int count)
-        {
-            if (frequentWordsList.Contains(newWord))
-            {
-                return frequentWordsList;
-            }
-
-            frequentWordsList.Add(newWord);
-
-            if (frequentWordsList.Count > count)
-            {
-                frequentWordsList.Sort((x, y) => dico[y].CompareTo(dico[x]));
-                frequentWordsList.RemoveAt(count);
-            }
-
-            return frequentWordsList;
         }
     }
 }
