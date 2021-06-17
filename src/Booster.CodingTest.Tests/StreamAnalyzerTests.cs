@@ -5,10 +5,10 @@ using System.Text;
 namespace Booster.CodingTest.Tests
 {
     [TestFixture]
-    public class ProgramTests
+    public class StreamAnalyzerTests
     {
         /// <summary>
-        /// Tests for <see cref="Program" />.
+        /// Tests for <see cref="StreamAnalyzer" />.
         /// </summary>
         [SetUp]
         public void Setup()
@@ -24,10 +24,10 @@ namespace Booster.CodingTest.Tests
             MemoryStream stream = new(byteArray);
 
             //Act
-            Program.ProcessText(stream);
+            StreamAnalyzer.ProcessText(stream);
 
             //Assert
-            Assert.AreEqual(stream.Length, Program.CountChar);
+            Assert.AreEqual(stream.Length, StreamAnalyzer.CountChar);
         }
 
         [Test]
@@ -39,10 +39,10 @@ namespace Booster.CodingTest.Tests
             MemoryStream stream = new(byteArray);
 
             //Act
-            Program.ProcessText(stream);
+            StreamAnalyzer.ProcessText(stream);
 
             //Assert
-            Assert.AreEqual(text.Split().Length, Program.CountWord);
+            Assert.AreEqual(text.Split().Length, StreamAnalyzer.CountWord);
         }
 
         [Test]
@@ -60,10 +60,10 @@ namespace Booster.CodingTest.Tests
             MemoryStream stream = new(byteArray);
 
             //Act
-            Program.ProcessText(stream);
+            StreamAnalyzer.ProcessText(stream);
 
             //Assert
-            CollectionAssert.AreEquivalent(smallestWords, Program.SmallestWords);
+            CollectionAssert.AreEquivalent(smallestWords, StreamAnalyzer.SmallestWords);
         }
 
         [Test]
@@ -81,10 +81,10 @@ namespace Booster.CodingTest.Tests
             MemoryStream stream = new(byteArray);
 
             //Act
-            Program.ProcessText(stream);
+            StreamAnalyzer.ProcessText(stream);
 
             //Assert
-            CollectionAssert.AreEquivalent(largestWords, Program.LargestWords);
+            CollectionAssert.AreEquivalent(largestWords, StreamAnalyzer.LargestWords);
         }
 
         [Test]
@@ -102,10 +102,10 @@ namespace Booster.CodingTest.Tests
             MemoryStream stream = new(byteArray);
 
             //Act
-            Program.ProcessText(stream);
+            StreamAnalyzer.ProcessText(stream);
 
             //Assert
-            CollectionAssert.AreEquivalent(frequentWords, Program.FrequentWords);
+            CollectionAssert.AreEquivalent(frequentWords, StreamAnalyzer.FrequentWords);
         }
 
         [Test]
@@ -118,10 +118,10 @@ namespace Booster.CodingTest.Tests
             MemoryStream stream = new(byteArray);
 
             //Act
-            Program.ProcessText(stream);
+            StreamAnalyzer.ProcessText(stream);
 
             //Assert
-            CollectionAssert.AreEqual(frequentCharacters, Program.FrequentChars);
+            CollectionAssert.AreEqual(frequentCharacters, StreamAnalyzer.FrequentChars);
         }
     }
 }
