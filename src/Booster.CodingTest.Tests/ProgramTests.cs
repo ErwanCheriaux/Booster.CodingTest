@@ -107,5 +107,21 @@ namespace Booster.CodingTest.Tests
             //Assert
             CollectionAssert.AreEquivalent(frequentWords, Program.FrequentWords);
         }
+
+        [Test]
+        public void ProcessText_WordsText_MostFrequentlyAppearingCharacters()
+        {
+            //Arrange
+            char[] frequentCharacters = { '&', 'e', 'f', ' ', 'g', '!', '@', 'a' };
+            string text = "a eeeeeeeee ffffff gggg @@ &&&&&&&&&&&&&&&&&&&&&&&&& !!!";
+            byte[] byteArray = Encoding.ASCII.GetBytes(text);
+            MemoryStream stream = new(byteArray);
+
+            //Act
+            Program.ProcessText(stream);
+
+            //Assert
+            CollectionAssert.AreEqual(frequentCharacters, Program.FrequentChars);
+        }
     }
 }

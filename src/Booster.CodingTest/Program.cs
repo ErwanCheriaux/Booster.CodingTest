@@ -44,7 +44,15 @@ namespace Booster.CodingTest
             get { return _frequentWords; }
         }
 
-        private static readonly Dictionary<string, int> Dico = new();
+        static private List<char> _frequentChars = new();
+
+        static public List<char> FrequentChars
+        {
+            get { return _frequentChars; }
+        }
+
+        private static readonly Dictionary<string, int> AppearingWord = new();
+        private static readonly Dictionary<char, int> AppearingChar = new();
 
         #endregion "properties"
 
@@ -63,13 +71,14 @@ namespace Booster.CodingTest
         {
             string word = "";
 
-            // The 10 most frequently appearing words.
-            _frequentWords = new();
-            Dico.Clear();
-
-            // Total number of characters and words.
             _countWord = 0;
             _countChar = 0;
+            _smallestWords = new();
+            _largestWords = new();
+            _frequentWords = new();
+            _frequentChars = new();
+            AppearingWord.Clear();
+            AppearingChar.Clear();
 
             while (true)
             {
@@ -84,18 +93,18 @@ namespace Booster.CodingTest
                 }
                 else if (word != "")
                 {
-                    if (Dico.ContainsKey(word))
+                    if (AppearingWord.ContainsKey(word))
                     {
-                        Dico[word]++;
+                        AppearingWord[word]++;
                     }
                     else
                     {
-                        Dico.Add(word, 1);
+                        AppearingWord.Add(word, 1);
                     }
 
                     if (output)
                     {
-                        Console.WriteLine($"{word}\t{Dico[word]}");
+                        Console.WriteLine($"{word}\t{AppearingWord[word]}");
                         Thread.Sleep(500);
                     }
 
@@ -107,13 +116,27 @@ namespace Booster.CodingTest
                     word = "";
                 }
 
+                if (AppearingChar.ContainsKey(c))
+                {
+                    AppearingChar[c]++;
+                }
+                else
+                {
+                    AppearingChar.Add(c, 1);
+                }
+
+                UpdateCharList(ref _frequentChars, c, FrequentChar);
                 _countChar++;
             }
         }
 
         private static int SmallestWord(string x, string y) => x.Length.CompareTo(y.Length);
+
         private static int LargestWord(string x, string y) => y.Length.CompareTo(x.Length);
-        private static int FrequentWord(string x, string y) => Dico[y].CompareTo(Dico[x]);
+
+        private static int FrequentWord(string x, string y) => AppearingWord[y].CompareTo(AppearingWord[x]);
+
+        private static int FrequentChar(char x, char y) => AppearingChar[y].CompareTo(AppearingChar[x]);
 
         /// <summary>
         /// Updates the words list.
@@ -134,6 +157,16 @@ namespace Booster.CodingTest
                     wordsList.RemoveAt(sizeList);
                 }
             }
+        }
+
+        private static void UpdateCharList(ref List<char> charsList, char newChar, Comparison<char> compareRule)
+        {
+            if (!charsList.Contains(newChar))
+            {
+                charsList.Add(newChar);
+            }
+
+            charsList.Sort(compareRule);
         }
     }
 }
