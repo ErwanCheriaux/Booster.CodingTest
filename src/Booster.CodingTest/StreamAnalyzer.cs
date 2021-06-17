@@ -65,9 +65,9 @@ namespace Booster.CodingTest
         /// Inform about the smallest and largest word in real time.
         /// </summary>
         /// <param name="text">The text to process in a Stream format.</param>
-        /// <param name="output">if set to <c>true</c> [output].</param>
+        /// <param name="delay">if set to <c>true</c> [output].</param>
         /// <returns></returns>
-        public static void ProcessText(Stream text, bool output = false)
+        public static void ProcessText(Stream text, int delay = 0)
         {
             Init();
             string word = "";
@@ -94,10 +94,9 @@ namespace Booster.CodingTest
                         AppearingWord.Add(word, 1);
                     }
 
-                    if (output)
+                    if (delay > 0)
                     {
-                        Console.WriteLine($"{word}\t{AppearingWord[word]}");
-                        Thread.Sleep(500);
+                        Thread.Sleep(delay);
                     }
 
                     UpdateWordsList(ref _smallestWords, word, 5, SmallestWord);
