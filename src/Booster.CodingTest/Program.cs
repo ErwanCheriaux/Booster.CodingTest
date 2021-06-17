@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Booster.CodingTest
@@ -12,12 +11,14 @@ namespace Booster.CodingTest
 
             Task.Run(() => StreamAnalyzer.ProcessText(stream, 500));
 
+            Console.CursorVisible = false;
+
             while (true)
             {
-                Console.Clear();
+                Console.SetCursorPosition(0, 0);
                 Console.WriteLine($"Number of char: {StreamAnalyzer.CountChar}");
+                Console.SetCursorPosition(0, 1);
                 Console.WriteLine($"Number of word: {StreamAnalyzer.CountWord}");
-                Thread.Sleep(500);
             }
         }
     }
