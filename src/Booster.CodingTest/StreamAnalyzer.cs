@@ -26,6 +26,13 @@ namespace Booster.CodingTest
             get { return _countChar; }
         }
 
+        static private string _sentence = "";
+
+        static public string Sentence
+        {
+            get { return _sentence; }
+        }
+
         static private List<string> _smallestWords = new();
 
         static public List<String> SmallestWords
@@ -75,7 +82,9 @@ namespace Booster.CodingTest
             while (true)
             {
                 int b = text.ReadByte();
-                if (b == -1) break;
+
+                //end of the stream
+                if (b == -1) return;
 
                 char c = Convert.ToChar(b);
 
@@ -92,11 +101,6 @@ namespace Booster.CodingTest
                     else
                     {
                         AppearingWord.Add(word, 1);
-                    }
-
-                    if (delay > 0)
-                    {
-                        Thread.Sleep(delay);
                     }
 
                     UpdateWordsList(ref _smallestWords, word, 5, SmallestWord);
@@ -118,6 +122,15 @@ namespace Booster.CodingTest
 
                 UpdateCharList(ref _frequentChars, c, FrequentChar);
                 _countChar++;
+
+                _sentence += c;
+                if (_sentence.Length > Console.WindowWidth)
+                {
+                    _sentence = _sentence[1..];
+                }
+
+                //slow down the process of the stream
+                if (delay > 0) Thread.Sleep(delay);
             }
         }
 
@@ -129,6 +142,7 @@ namespace Booster.CodingTest
         {
             _countWord = 0;
             _countChar = 0;
+            _sentence = "";
             _smallestWords = new();
             _largestWords = new();
             _frequentWords = new();
