@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Booster.CodingTest
@@ -11,12 +12,11 @@ namespace Booster.CodingTest
 
             Task.Run(() => StreamAnalyzer.ProcessText(stream, 50));
 
+            Console.Clear();
             Console.CursorVisible = false;
 
             while (true)
             {
-                string outcome = "";
-                
                 Console.SetCursorPosition(0, 0);
                 Console.WriteLine($"{StreamAnalyzer.Sentence}");
                 Console.SetCursorPosition(0, 1);
@@ -24,26 +24,27 @@ namespace Booster.CodingTest
                 Console.SetCursorPosition(0, 2);
                 Console.WriteLine($"Number of word: {StreamAnalyzer.CountWord}");
 
-                outcome = "";
-                Console.SetCursorPosition(0, 3);
-                StreamAnalyzer.SmallestWords.ForEach((e) => outcome += e + " ");
-                Console.WriteLine($"Smallest words: {outcome}");
-
-                outcome = "";
-                Console.SetCursorPosition(0, 4);
-                StreamAnalyzer.LargestWords.ForEach((e) => outcome += e + " ");
-                Console.WriteLine($"Largest words: {outcome}");
-
-                outcome = "";
-                Console.SetCursorPosition(0, 5);
-                StreamAnalyzer.FrequentWords.ForEach((e) => outcome += e + " ");
-                Console.WriteLine($"Frequent words: {outcome}");
-
-                outcome = "";
-                Console.SetCursorPosition(0, 6);
-                StreamAnalyzer.FrequentChars.ForEach((e) => outcome += e + " ");
-                Console.WriteLine($"Frequent chars: {outcome}");
+                PrintList(StreamAnalyzer.SmallestWords, 0, 3);
+                PrintList(StreamAnalyzer.LargestWords, 0, 4);
+                PrintList(StreamAnalyzer.FrequentWords, 0, 5);
+                PrintList(StreamAnalyzer.FrequentChars, 0, 6);
             }
+        }
+
+        private static void PrintList(List<string> l, int x, int y, string message = "")
+        {
+            string outcome = "";
+            Console.SetCursorPosition(x, y);
+            l.ForEach((e) => outcome += e + " ");
+            Console.WriteLine($"{message}{outcome}");
+        }
+
+        private static void PrintList(List<char> l, int x, int y, string message = "")
+        {
+            string outcome = "";
+            Console.SetCursorPosition(x, y);
+            l.ForEach((e) => outcome += e + " ");
+            Console.WriteLine($"{message}{outcome}");
         }
     }
 }
