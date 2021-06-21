@@ -94,14 +94,8 @@ namespace Booster.CodingTest
                 }
                 else if (word != "")
                 {
-                    if (AppearingWord.ContainsKey(word))
-                    {
-                        AppearingWord[word]++;
-                    }
-                    else
-                    {
-                        AppearingWord.Add(word, 1);
-                    }
+                    // word detected
+                    UpdateDico(AppearingWord, word);
 
                     UpdateList(ref _smallestWords, word, 5, SmallestWord);
                     UpdateList(ref _largestWords, word, 5, LargestWord);
@@ -111,18 +105,11 @@ namespace Booster.CodingTest
                     word = "";
                 }
 
-                if (AppearingChar.ContainsKey(c))
-                {
-                    AppearingChar[c]++;
-                }
-                else
-                {
-                    AppearingChar.Add(c, 1);
-                }
+                UpdateDico(AppearingChar, c);
 
                 UpdateList(ref _frequentChars, c, 0, FrequentChar);
+                
                 _countChar++;
-
                 _sentence += c;
 
                 try
@@ -134,6 +121,7 @@ namespace Booster.CodingTest
                 }
                 catch (IOException)
                 {
+                    // IOException raised by the unit tests
                     if (_sentence.Length > 25)
                     {
                         _sentence = _sentence[1..];
@@ -162,6 +150,25 @@ namespace Booster.CodingTest
             AppearingChar.Clear();
         }
 
+        /// <summary>
+        /// Updates the dico with the new item.
+        /// </summary>
+        /// <typeparam name="T">Char or string</typeparam>
+        /// <param name="dico">The dico.</param>
+        /// <param name="newItem">The new item.</param>
+        /// <returns></returns>
+        private static void UpdateDico<T>(Dictionary<T,int> dico, T newItem)
+        {
+            if (dico.ContainsKey(newItem))
+            {
+                dico[newItem]++;
+            }
+            else
+            {
+                dico.Add(newItem, 1);
+            }
+        }
+
         private static int SmallestWord(string x, string y) => x.Length.CompareTo(y.Length);
 
         private static int LargestWord(string x, string y) => y.Length.CompareTo(x.Length);
@@ -171,8 +178,9 @@ namespace Booster.CodingTest
         private static int FrequentChar(char x, char y) => AppearingChar[y].CompareTo(AppearingChar[x]);
 
         /// <summary>
-        /// Updates the words list.
+        /// Updates the list with the new item according to the rule and the size.
         /// </summary>
+        /// <typeparam name="T">Char or string</typeparam>
         /// <param name="list">The list to update.</param>
         /// <param name="newItem">The new item to compare with the list.</param>
         /// <param name="size">The max size of the list. No size limite if size is null.</param>
