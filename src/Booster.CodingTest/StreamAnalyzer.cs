@@ -203,7 +203,6 @@ namespace Booster.CodingTest
             {
                 return 0;
             }
-            
         }
     }
 }

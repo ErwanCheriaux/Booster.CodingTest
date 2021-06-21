@@ -27,7 +27,7 @@ namespace Booster.CodingTest
                 PrintList(StreamAnalyzer.SmallestWords, 0, 3, "Smallest words: ");
                 PrintList(StreamAnalyzer.LargestWords, 0, 4, "Largest words: ");
                 PrintList(StreamAnalyzer.FrequentWords, 0, 5, "Most frequent words: ");
-                
+
                 PrintCharFrequency(0, 6, "Most frequent characters: ");
             }
         }
@@ -45,10 +45,10 @@ namespace Booster.CodingTest
         {
             Console.SetCursorPosition(x, y++);
             Console.WriteLine($"{message}");
-            
+
             List<char> l = new(StreamAnalyzer.FrequentChars);
-            
-            foreach(char c in l)
+
+            foreach (char c in l)
             {
                 Console.SetCursorPosition(x, y++);
                 message = $"'{c}' {StreamAnalyzer.GetCharFrequency(c)}%";
