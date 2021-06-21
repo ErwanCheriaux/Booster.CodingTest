@@ -32,10 +32,10 @@ Treat your solution as being code you are ready to submit for a PR i.e. producti
 
 ## Comments
 
-Please find a console solution which analizes and display the stream with all statistic information in real time.  
-The display function and the stream analyzer run in 2 differents threads.  
-There is a NUnit test project for the static class SteamAnalizer.  
-The solution can be run from visual studio 2019 as well as a command promt. Note the console need to be stretch to view all information.  
+Please find a console solution which analyzes and display the stream with all statistic information in real time.  
+The display function and the stream analyzer run in 2 different threads.  
+There is an NUnit test project for the static class SteamAnalizer.  
+The solution can be run from visual studio 2019 as well as a command prompt. Note the console needs to be stretch to view all information.  
 
 ### Improvement
 
