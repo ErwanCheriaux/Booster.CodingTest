@@ -192,5 +192,18 @@ namespace Booster.CodingTest
                 list.RemoveAt(size);
             }
         }
+
+        public static double GetCharFrequency(char character)
+        {
+            if (CountChar > 0)
+            {
+                return Math.Round(AppearingChar[character] / (double)CountChar * 100, 2);
+            }
+            else
+            {
+                return 0;
+            }
+            
+        }
     }
 }
