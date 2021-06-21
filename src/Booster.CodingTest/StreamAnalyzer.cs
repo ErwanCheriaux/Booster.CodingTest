@@ -193,6 +193,11 @@ namespace Booster.CodingTest
             }
         }
 
+        /// <summary>
+        /// Gets the character frequency in percentage.
+        /// </summary>
+        /// <param name="character">The character.</param>
+        /// <returns></returns>
         public static double GetCharFrequency(char character)
         {
             if (CountChar > 0)

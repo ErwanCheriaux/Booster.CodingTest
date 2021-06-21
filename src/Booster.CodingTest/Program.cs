@@ -19,6 +19,9 @@ namespace Booster.CodingTest
 
             while (true)
             {
+                // in case of the console is manually resized
+                Console.CursorVisible = false;
+
                 Console.SetCursorPosition(0, 0);
                 ColoredConsole.WriteLine($"{Cyan(StreamAnalyzer.Sentence)}");
                 Console.SetCursorPosition(0, 1);
@@ -34,6 +37,15 @@ namespace Booster.CodingTest
             }
         }
 
+        /// <summary>
+        /// Generic function to prints a list of Char and String in the console.
+        /// </summary>
+        /// <typeparam name="T">char or string</typeparam>
+        /// <param name="list">The list to print.</param>
+        /// <param name="x">The coordinate x.></param>
+        /// <param name="y">The coordinate y.</param>
+        /// <param name="message">The message to print before the list values.</param>
+        /// <returns></returns>
         private static void PrintList<T>(List<T> list, int x, int y, string message = "")
         {
             string outcome = "";
@@ -44,6 +56,13 @@ namespace Booster.CodingTest
             ColoredConsole.WriteLine($"{DarkCyan(message)}{outcome}");
         }
 
+        /// <summary>
+        /// Prints the StreamAnalyzer.FrequentChars list with percentage freqency.
+        /// </summary>
+        /// <param name="x">The coordinate x.></param>
+        /// <param name="y">The coordinate y.</param>
+        /// <param name="message">The message to print before the char values.</param>
+        /// <returns></returns>
         private static void PrintCharFrequency(int x, int y, string message = "")
         {
             Console.SetCursorPosition(x, y++);
