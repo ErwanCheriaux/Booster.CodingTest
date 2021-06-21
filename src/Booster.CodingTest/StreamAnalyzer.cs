@@ -103,9 +103,9 @@ namespace Booster.CodingTest
                         AppearingWord.Add(word, 1);
                     }
 
-                    UpdateWordsList(ref _smallestWords, word, 5, SmallestWord);
-                    UpdateWordsList(ref _largestWords, word, 5, LargestWord);
-                    UpdateWordsList(ref _frequentWords, word, 10, FrequentWord);
+                    UpdateList(ref _smallestWords, word, 5, SmallestWord);
+                    UpdateList(ref _largestWords, word, 5, LargestWord);
+                    UpdateList(ref _frequentWords, word, 10, FrequentWord);
 
                     _countWord++;
                     word = "";
@@ -120,7 +120,7 @@ namespace Booster.CodingTest
                     AppearingChar.Add(c, 1);
                 }
 
-                UpdateCharList(ref _frequentChars, c, FrequentChar);
+                UpdateList(ref _frequentChars, c, 0, FrequentChar);
                 _countChar++;
 
                 _sentence += c;
@@ -162,39 +162,23 @@ namespace Booster.CodingTest
         /// <summary>
         /// Updates the words list.
         /// </summary>
-        /// <param name="wordsList">The words list to update.</param>
-        /// <param name="newWord">The new word to compare with the words list.</param>
-        /// <param name="sizeList">The max size of the word list.</param>
-        /// <param name="compareRule">The comparing rule: smallestWord, largestWord or frequentWord</param>
-        private static void UpdateWordsList(ref List<string> wordsList, string newWord, int sizeList, Comparison<string> compareRule)
+        /// <param name="list">The list to update.</param>
+        /// <param name="newItem">The new item to compare with the list.</param>
+        /// <param name="size">The max size of the list. No size limite if size is null.</param>
+        /// <param name="compareRule">The comparing rule: smallestWord, largestWord, frequentWord or frequentChar.</param>
+        private static void UpdateList<T>(ref List<T> list, T newItem, int size, Comparison<T> compareRule)
         {
-            if (!wordsList.Contains(newWord))
+            if (!list.Contains(newItem))
             {
-                wordsList.Add(newWord);
+                list.Add(newItem);
+                list.Sort(compareRule);
 
-                if (wordsList.Count > sizeList)
+                //do not truc the list if count is null
+                if (size > 0 && list.Count > size)
                 {
-                    wordsList.Sort(compareRule);
-                    wordsList.RemoveAt(sizeList);
+                    list.RemoveAt(size);
                 }
             }
-        }
-
-        /// <summary>
-        /// Updates the character list.
-        /// </summary>
-        /// <param name="charsList">The chars list to update.</param>
-        /// <param name="newChar">The new character to add in the charsList.</param>
-        /// <param name="compareRule">The comparing rule: frequentChar</param>
-        /// <returns></returns>
-        private static void UpdateCharList(ref List<char> charsList, char newChar, Comparison<char> compareRule)
-        {
-            if (!charsList.Contains(newChar))
-            {
-                charsList.Add(newChar);
-            }
-
-            charsList.Sort(compareRule);
         }
     }
 }
