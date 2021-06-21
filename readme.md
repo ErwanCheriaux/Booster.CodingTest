@@ -29,3 +29,16 @@ You can then read from the stream as you would any other non-seekable `System.IO
 The problem of processing the stream is intentionally trivial. What we're interested in seeing is your approach to problem solving, code structure, use of appropriate patterns, adherance to standards, consistency and overall code quality. 
 
 Treat your solution as being code you are ready to submit for a PR i.e. production ready.
+
+## Comments
+
+Please find a console solution which analizes and display the stream with all statistic information in real time.  
+The display function and the stream analyzer run in 2 differents threads.  
+There is a NUnit test project for the static class SteamAnalizer.  
+The solution can be run from visual studio 2019 as well as a command promt. Note the console need to be stretch to view all information.  
+
+### Improvement
+
+The next step would be to create a graphical interface to display the stream and all information in a Windows form.  
+
+Thanks for reading.
