@@ -1,8 +1,8 @@
 ﻿using Colors.Net;
-using static Colors.Net.StringStaticMethods;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static Colors.Net.StringStaticMethods;
 
 namespace Booster.CodingTest
 {

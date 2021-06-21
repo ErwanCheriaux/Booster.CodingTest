@@ -108,7 +108,7 @@ namespace Booster.CodingTest
                 UpdateDico(AppearingChar, c);
 
                 UpdateList(ref _frequentChars, c, 0, FrequentChar);
-                
+
                 _countChar++;
                 _sentence += c;
 
@@ -157,7 +157,7 @@ namespace Booster.CodingTest
         /// <param name="dico">The dico.</param>
         /// <param name="newItem">The new item.</param>
         /// <returns></returns>
-        private static void UpdateDico<T>(Dictionary<T,int> dico, T newItem)
+        private static void UpdateDico<T>(Dictionary<T, int> dico, T newItem)
         {
             if (dico.ContainsKey(newItem))
             {
