@@ -24,29 +24,20 @@ namespace Booster.CodingTest
                 Console.SetCursorPosition(0, 2);
                 Console.WriteLine($"Number of word: {StreamAnalyzer.CountWord}");
 
-                PrintList(StreamAnalyzer.SmallestWords, 0, 3);
-                PrintList(StreamAnalyzer.LargestWords, 0, 4);
-                PrintList(StreamAnalyzer.FrequentWords, 0, 5);
-                PrintList(StreamAnalyzer.FrequentChars, 0, 6);
+                PrintList(StreamAnalyzer.SmallestWords, 0, 3, "Smallest words: ");
+                PrintList(StreamAnalyzer.LargestWords, 0, 4, "Largest words: ");
+                PrintList(StreamAnalyzer.FrequentWords, 0, 5, "Most frequent words: ");
+                PrintList(StreamAnalyzer.FrequentChars, 0, 6, "Most frequent characters: ");
             }
         }
 
-        private static void PrintList(List<string> list, int x, int y, string message = "")
+        private static void PrintList<T>(List<T> list, int x, int y, string message = "")
         {
-            string outcome = "";
-            List<string> l = new(list);
+            List<T> l = new(list);
             Console.SetCursorPosition(x, y);
-            l.ForEach((e) => outcome += e + " ");
-            Console.WriteLine($"{message}{outcome}");
-        }
-
-        private static void PrintList(List<char> list, int x, int y, string message = "")
-        {
-            string outcome = "";
-            List<char> l = new(list);
-            Console.SetCursorPosition(x, y);
-            l.ForEach((e) => outcome += e + " ");
-            Console.WriteLine($"{message}{outcome}");
+            l.ForEach((e) => message += e + " ");
+            while (message.Length < Console.WindowWidth) { message += " "; }
+            Console.WriteLine($"{message}");
         }
     }
 }
