@@ -124,9 +124,20 @@ namespace Booster.CodingTest
                 _countChar++;
 
                 _sentence += c;
-                if (_sentence.Length > Console.WindowWidth)
+
+                try
                 {
-                    _sentence = _sentence[1..];
+                    if (_sentence.Length > Console.WindowWidth)
+                    {
+                        _sentence = _sentence[1..];
+                    }
+                }
+                catch (IOException)
+                {
+                    if (_sentence.Length > 25)
+                    {
+                        _sentence = _sentence[1..];
+                    }
                 }
 
                 //slow down the process of the stream
@@ -171,13 +182,14 @@ namespace Booster.CodingTest
             if (!list.Contains(newItem))
             {
                 list.Add(newItem);
-                list.Sort(compareRule);
+            }
 
-                //do not truc the list if count is null
-                if (size > 0 && list.Count > size)
-                {
-                    list.RemoveAt(size);
-                }
+            list.Sort(compareRule);
+
+            //do not trunc the list if count is null
+            if (size > 0 && list.Count > size)
+            {
+                list.RemoveAt(size);
             }
         }
     }
