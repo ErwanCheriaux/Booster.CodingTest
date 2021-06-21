@@ -31,17 +31,19 @@ namespace Booster.CodingTest
             }
         }
 
-        private static void PrintList(List<string> l, int x, int y, string message = "")
+        private static void PrintList(List<string> list, int x, int y, string message = "")
         {
             string outcome = "";
+            List<string> l = new(list);
             Console.SetCursorPosition(x, y);
             l.ForEach((e) => outcome += e + " ");
             Console.WriteLine($"{message}{outcome}");
         }
 
-        private static void PrintList(List<char> l, int x, int y, string message = "")
+        private static void PrintList(List<char> list, int x, int y, string message = "")
         {
             string outcome = "";
+            List<char> l = new(list);
             Console.SetCursorPosition(x, y);
             l.ForEach((e) => outcome += e + " ");
             Console.WriteLine($"{message}{outcome}");
