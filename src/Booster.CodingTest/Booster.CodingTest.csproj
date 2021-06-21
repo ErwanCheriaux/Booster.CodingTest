@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Colors.Net" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Booster.CodingTest.Library">
       <HintPath>..\..\ref\Booster.CodingTest.Library.dll</HintPath>
     </Reference>
